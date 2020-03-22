@@ -1,2 +1,4 @@
 # dotfiles
-Configurations
+Configuration files for:
+* tmux
+* vim
