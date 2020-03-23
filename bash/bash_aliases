@@ -1,0 +1,24 @@
+
+function pretty_csv {
+    column -t -s $'\t'$';', "$@" |less -F -S -X -K -W
+}
+
+function calc {
+    python -c "print $@"
+}
+
+function convert2gray {
+    gs -sOutputFile=converted.pdf -sDEVICE=pdfwrite -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray -dCompatibiltyLevel=1.4 -dNOPAUSE -dAutoRotatePages=/None -dBATCH $@ 
+}
+
+alias attach="tmux a -dt"
+alias tns="tmux new -s"
+alias tls="tmux ls"
+alias csd="sshpass -p "<password>" ssh -oHostKeyAlgorithms=+ssh-dss kolokasis@gate1.csd.uoc.gr"
+alias ics="ssh kolokasis@<myip>"
+alias issh="ssh -A -t kolokasis@<gatesip> ssh -A -t"
+alias open="xdg-open"
+alias vpn="sudo openvpn --config ~/client.ovpn"
+alias isu="systemctl suspend"
+alias vt="vim -p"
+alias vs="vim -O"
