@@ -122,6 +122,8 @@ Plugin 'christoomey/vim-tmux-navigator'
 
 Plugin 'bfrg/vim-cpp-modern'
 
+Plugin 'aserebryakov/vim-todo-lists'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -142,6 +144,15 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+" ToDo List Plugin
+let g:VimTodoListsCustomKeyMapper = 'VimTodoListsCustomMappings'
+
+function! VimTodoListsCustomMappings()
+    nnoremap <buffer> s :VimTodoListsToggleItem<CR>
+    nnoremap <buffer> <Space> :VimTodoListsToggleItem<CR>
+    noremap <buffer> <leader>e :silent call VimTodoListsSetItemMode()<CR>
+endfunction
 
 "---------------------------------------------------------------------
 "                       Snippets Code Mapping to Keys
