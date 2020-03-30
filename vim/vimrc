@@ -56,39 +56,14 @@ nnoremap tn :tabnew<Space>
 
 " Split pane
 nnoremap s  :split<Space>
+nnoremap sf :sfind<Space>
 nnoremap vs :vsplit<Space>
+nnoremap vf :vsplit \| :find<Space>
 
 " Resize pane
 nnoremap <Leader>< :vertical resize -5<CR>
 nnoremap <Leader>> :vertical resize +5<CR>
 
-" Run make in the background
-nnoremap <Leader>m :silent execute 'make!' \| execute 'redraw!'<CR>
-
-" Make commit
-nnoremap <Leader>c :!make commit m=""<left>
-
-" Make update
-nnoremap <Leader>u :!make up<CR>
-
-" Make lastdiff 
-nnoremap <Leader>d :!make lastdiff<CR>
-
-" Make lastdiff2
-nnoremap <Leader>dd :!make lastdiff2<CR>
-
-" Make status
-nnoremap <Leader>s :!make status<CR>
-
-" Make view
-nnoremap <Leader>v :silent execute '!make view' \| execute 'redraw!'<CR>
-
-" Redraw window
-nnoremap <Leader>r :execute 'redraw!'<CR>
-
-" Line splitting for latex
-nnoremap <Leader>l :%s/\. \([A-Z]\)/. \1/<CR>
- 
 " Deep grep commands
 nnoremap gr :grep -r ./* -e ''<left>
 nnoremap <C-n> :cn<CR>
@@ -124,6 +99,8 @@ Plugin 'bfrg/vim-cpp-modern'
 
 Plugin 'aserebryakov/vim-todo-lists'
 
+Plugin 'qpkorr/vim-bufkill'
+
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -144,15 +121,6 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
-
-" ToDo List Plugin
-let g:VimTodoListsCustomKeyMapper = 'VimTodoListsCustomMappings'
-
-function! VimTodoListsCustomMappings()
-    nnoremap <buffer> s :VimTodoListsToggleItem<CR>
-    nnoremap <buffer> <Space> :VimTodoListsToggleItem<CR>
-    noremap <buffer> <leader>e :silent call VimTodoListsSetItemMode()<CR>
-endfunction
 
 "---------------------------------------------------------------------
 "                       Snippets Code Mapping to Keys
