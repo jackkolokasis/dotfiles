@@ -1,0 +1,6 @@
+[user]
+	email =
+	name = Jack Kolokasis
+
+[core]
+    editor = vim
