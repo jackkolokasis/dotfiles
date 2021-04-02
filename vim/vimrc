@@ -1,48 +1,13 @@
-" Version: 26-02-2018
-" Authors: Iacovos G. Kolokasis
-" Description: .vimrc.
-"               This .vimrc is minimal but feauture
-"
-
-filetype plugin on            " Enable language-specific settings
-filetype indent on            " Enable language-dependent indenting
-syntax on                     " Enable syntax highlighting
-
-let mapleader = " "           " Change <Leader> key to Space
-
-set path+=**                  " Enable recursive search for :find
-set autoindent                " Enable auto-indentation
-set smartindent
-set ignorecase                " Make search case-insensitive
+set path+=**                  " Enable recursive search for :find                                          
+set textwidth=70              " Text width                                                                 
+set ignorecase                " Make search case-insensitive                                   
 set incsearch                 " Start searching before pressing Enter
-set nowrap                    " Don't wrap lines
-set wildmenu                  " Enable command-line completion
 set splitright                " Open new vertical split to the right
 set splitbelow                " Open new horizontal split below
-set laststatus=2              " Always show statusline
-set textwidth=70              " Text width
-set nu                        " Line numbers on
-set relativenumber            " Relative numbers
-set nocompatible
 set tabstop=4
-set shiftwidth=4
-set expandtab
-set backspace=2
-set showmatch
-set hlsearch                  " Search Highlight
-set ruler                     " Ruler display
-set mouse=a                   " Enbale mouse for all modes
-set background=dark
-set tags=tags;/               " Move up the directory hierarchy until it has found the file add   
 
-"" Code Templates
-"autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
-"autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
 
-" Highlight color column
-highlight ColorColumn ctermbg=8 
-
-" Easier split resizing
+" Easier split resizing 
 map <C-n> <c-w><
 map <C-m> <c-w>>
 
@@ -64,11 +29,35 @@ nnoremap vf :vsplit \| :find<Space>
 nnoremap <Leader>< :vertical resize -5<CR>
 nnoremap <Leader>> :vertical resize +5<CR>
 
-" Deep grep commands
-nnoremap gr :grep -r ./* -e ''<left>
-nnoremap <C-n> :cn<CR>
-nnoremap <C-p> :cp<CR>
-nnoremap <Leader>f :bfirst<CR>
+" Run make in the background
+nnoremap <Leader>m :silent execute 'make!' \| execute 'redraw!'<CR>
+
+" Make commit
+nnoremap <Leader>c :!make commit m=""<left>
+
+" Make update
+nnoremap <Leader>u :!make up<CR>
+
+" Make lastdiff 
+nnoremap <Leader>d :!make lastdiff<CR>
+
+" Make lastdiff2
+nnoremap <Leader>dd :!make lastdiff2<CR>
+
+" Update origin repository 
+nnoremap <Leader>o :!make uporigin<CR>
+
+" Make status
+nnoremap <Leader>s :!make status<CR>
+
+" Make view
+nnoremap <Leader>v :silent execute '!make view' \| execute 'redraw!'<CR>
+
+" Redraw window
+nnoremap <Leader>r :execute 'redraw!'<CR>
+
+" Line splitting for latex
+nnoremap <Leader>l :%s/\. \([A-Z]\)/. \1/<CR>
 
 " Starts auto-correction
 map <F6> :setlocal spell! spelllang=en<CR>
@@ -77,86 +66,3 @@ map <F7> :setlocal spell! spelllang=el<CR>
 " Auto-correct last misspelled word.
 imap <c-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 nmap <c-l> i<c-g>u<Esc>[s1z=`]a<c-g>u<Esc>
-
-" Set textwidth
-noremap <Leader>t :set textwidth=
-
-" Use <F11> to toggle between 'paste' and 'nopaste'
-set pastetoggle=<F11>
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-Plugin 'Valloric/YouCompleteMe'
-
-Plugin 'vim-syntastic/syntastic'
-
-Plugin 'christoomey/vim-tmux-navigator'
-
-Plugin 'bfrg/vim-cpp-modern'
-
-Plugin 'aserebryakov/vim-todo-lists'
-
-Plugin 'qpkorr/vim-bufkill'
-
-call vundle#end()            " required
-filetype plugin indent on    " required
-
-" configure tags - add additional tags here or comment out not-used ones
-set tags+=~/.vim/tags/cpp
-" build tags of your own project with Ctrl-F12
-map <C-F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
-
-"---------------------------------------------------------------------
-"                       Snippets Code Mapping to Keys
-"---------------------------------------------------------------------
-
-" File information Snippet to put at the start of the code file
-
-map <F2> o/**************************************************
-      \<CR>
-      \<CR>file: <ESC>:put=expand('%:t')<ESC>kJA
-      \<CR>
-      \<CR>@Author:   Iacovos G. Kolokasis
-      \<CR><ESC>:put=strftime('@Version:  %d-%m-%Y')<ESC>kJA
-      \<CR>@email:    kolokasis@ics.forth.gr
-      \<CR>
-      \<CR>Write here brief explanation about your code
-      \<CR>
-      \<CR><ESC>i**************************************************
-      \<ESC>A
-      \<CR>*/
-      \<CR><ESC>
-
-
-map <F3> o###################################################
-      \<CR>#
-      \<CR># file: <ESC>:put=expand('%:t')<ESC>kJA
-      \<CR>#
-      \<CR># @Author:   Iacovos G. Kolokasis
-      \<CR><ESC>:put=strftime('# @Version:  %d-%m-%Y')<ESC>kJA
-      \<CR># @email:    kolokasis@ics.forth.gr
-      \<CR>#
-      \<CR># Write here brief explanation about your code
-      \<CR>#
-      \<CR>#<ESC>i##################################################
-      \<ESC>A
-      \<CR><ESC>
-" Map Y to act like D and C, i.e. to yank until EOL, rather than act as yy,
-" which is the default
-map Y y$
